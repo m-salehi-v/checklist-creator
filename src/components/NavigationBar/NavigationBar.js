@@ -13,6 +13,9 @@ const navigationBar = props => {
                     <LinkContainer to="/" exact>
                         <Nav.Link >Home</Nav.Link>
                     </LinkContainer >
+                    <LinkContainer to="/create">
+                        <Nav.Link >Create</Nav.Link>
+                    </LinkContainer >
                     <LinkContainer to="/signin">
                         <Nav.Link >Sign In</Nav.Link>
                     </LinkContainer>

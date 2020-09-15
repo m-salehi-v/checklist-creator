@@ -1,0 +1,51 @@
+.Jumbotron {
+    height: 91vh;
+    margin: 0;
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(../../assets/img/hero.jpg);
+    background-size: cover;
+    background-position: left center;
+    color: white;
+}
+
+.Jumbotron h1 {
+    margin: 30px 5% 40px 5%;
+    letter-spacing: 4px;
+    font-size: 35px;
+    text-align: center;
+    font-weight: 400;
+}
+
+.Jumbotron p {
+    margin: 0 5% 40px 5%;
+    font-size: 18px;
+    text-align: center;
+    font-weight: 300;
+
+}
+
+.Jumbotron button {
+    width: 170px;
+    height: 50px;
+    font-size: 20px;
+    letter-spacing: 1px;
+    display: block;
+    margin:0 auto;
+}
+
+@media (min-width: 750px) {
+    .Jumbotron h1 {
+        margin: 40px 5% 50px 5%;
+        font-size: 50px;
+        text-align: left;
+    }
+    .Jumbotron p {
+        margin: 0 5% 60px 5%;
+        text-align: left;
+        width: 500px;
+        font-size: 18px;
+
+    }
+    .Jumbotron button {
+        margin-left: 5%;
+    }
+}
