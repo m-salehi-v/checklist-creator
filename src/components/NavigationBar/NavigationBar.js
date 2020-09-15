@@ -6,7 +6,7 @@ import { LinkContainer } from 'react-router-bootstrap';
 const navigationBar = props => {
     return (
         <Navbar collapseOnSelect expand="sm" bg="dark" variant="dark">
-            <LinkContainer to="/"><Navbar.Brand>Checklist Creator</Navbar.Brand></LinkContainer>
+            <LinkContainer to="/" exact><Navbar.Brand>Checklist Creator</Navbar.Brand></LinkContainer>
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <Navbar.Collapse className="justify-content-end">
                 <Nav>
