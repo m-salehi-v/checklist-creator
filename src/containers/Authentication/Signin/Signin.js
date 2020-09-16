@@ -1,9 +1,11 @@
 import React, {useState} from 'react';
 import { Form, Button, Card } from 'react-bootstrap';
 import {Link} from 'react-router-dom'
+import { useDispatch } from 'react-redux';
 
 import classes from '../auth.module.css';
 import {checkValidity} from '../../../shared/shared';
+import * as actions from '../../../store/actions';
 
 const Signin = props => {
     const [formElements, setFromElements] = useState([        
@@ -31,7 +33,8 @@ const Signin = props => {
         }
     ])
     const [isFormValid, setFromValid] = useState(false);
-
+    const dispatch = useDispatch()
+    const onAuthUser = (email, password, isSignup) => dispatch(actions.authUser(email, password, isSignup));
     const inputChangeHandler = (event, index) => {
         const updatedForm = [...formElements];
         const updatedEl = { ...formElements[index] };
@@ -46,13 +49,16 @@ const Signin = props => {
         })
         setFromValid(isValid)
     }
-
+    const signinSubmitHandler = (event) => {
+        event.preventDefault();
+        onAuthUser(formElements[0].value, formElements[1].value, false);
+    }
     return (
         <div className={classes.Container}>
             <Card className={classes.Card} >
                 <Card.Body>
                     <Card.Title className="text-center" style={{ fontSize: '26px' }}>Sign In</Card.Title>
-                    <Form>
+                    <Form onSubmit={signinSubmitHandler}>
                     {formElements.map((element, index) => (
                             <Form.Group key={index}>
                                 <Form.Label>{element.label}</Form.Label>

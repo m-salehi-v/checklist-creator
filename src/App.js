@@ -1,6 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import React from 'react';
-import {Route, Switch} from 'react-router-dom'
+import {Redirect, Route, Switch} from 'react-router-dom'
 
 import './App.css';
 import Home from './containers/Home/Home';
@@ -16,6 +16,7 @@ function App() {
           <Route path="/" exact component={Home}/>
           <Route path="/signup" component={Signup} />
           <Route path="/signin" component={Signin} />
+          <Redirect to="/"/>
         </Switch>
       </Layout>
     </div>
