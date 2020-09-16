@@ -2,5 +2,9 @@ export {
     authFail,
     authStart,
     authSuccess,
-    authUser
+    authUser,
+    logoutSucceed,
+    logout,
+    autoLogin,
+    checkTimeout
 } from './auth';

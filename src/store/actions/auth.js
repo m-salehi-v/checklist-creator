@@ -6,9 +6,10 @@ export const authStart = () => {
     }
 }
 
-export const authSuccess = () => {
+export const authSuccess = (userId) => {
     return {
-        type: actionTypes.AUTH_SUCCESS
+        type: actionTypes.AUTH_SUCCESS,
+        userId
     }
 }
 
@@ -25,5 +26,30 @@ export const authUser = (email, password, isSignup) => {
         email,
         password,
         isSignup
+    }
+}
+
+export const logout = () => {
+    return {
+        type: actionTypes.AUTH_LOGOUT_SAGA
+    }
+}
+
+export const logoutSucceed = () => {
+    return {
+        type: actionTypes.AUTH_LOGOUT
+    }
+}
+
+export const autoLogin = () => {
+    return {
+        type: actionTypes.AUTO_LOGIN
+    }
+}
+
+export const checkTimeout = (expirationTime) => {
+    return {
+        type: actionTypes.CHECK_TIMEOUT,
+        expirationTime
     }
 }

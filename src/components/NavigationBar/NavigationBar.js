@@ -1,11 +1,15 @@
 import React from 'react';
 import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 import './NavigationBar.css';
+import * as actions from '../../store/actions'
+
 const NavigationBar = props => {
     const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
+    const dispatch = useDispatch();
+    const onLogout = () => dispatch(actions.logout());
 
     return (
         <Navbar collapseOnSelect expand="sm" bg="dark" variant="dark">
@@ -29,12 +33,13 @@ const NavigationBar = props => {
                         <NavDropdown title="User" bg="dark" variant="dark" className="DropDown">
                             <LinkContainer to="/mychecklists"><NavDropdown.Item>My Checklists</NavDropdown.Item></LinkContainer>
                             <NavDropdown.Divider />
-                            <NavDropdown.Item >Log out</NavDropdown.Item>
+                            <LinkContainer to="/" exact><NavDropdown.Item onClick={onLogout}>Log out</NavDropdown.Item></LinkContainer>
                         </NavDropdown>
                     }
                 </Nav>
             </Navbar.Collapse>
         </Navbar>
+
     );
 }
 
