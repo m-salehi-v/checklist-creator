@@ -7,6 +7,7 @@ import './App.css';
 import Home from './containers/Home/Home';
 import Signin from './containers/Authentication/Signin/Signin';
 import Signup from './containers/Authentication/Signup/Signup';
+import CreateChecklist from './containers/CreateChecklist/CreateChecklist';
 import Layout from './hoc/Layout/Layout';
 import * as actions from './store/actions';
 
@@ -24,6 +25,7 @@ function App(props) {
           <Route path="/" exact component={Home}/>
           <Route path="/signup" component={Signup} />
           <Route path="/signin" component={Signin} />
+          <Route path="/create" component={CreateChecklist} />
           <Redirect to="/"/>
         </Switch>
       </Layout>

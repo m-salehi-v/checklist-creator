@@ -1,0 +1,75 @@
+.Title {
+    border: 0;
+    border-bottom: 1px solid #d3d3d3;
+    width: 100%;
+    max-width: 250px;
+    margin: 0 0 50px 0;
+    height: 40px;
+    color: #474747;
+    font-size: 20px;
+    font-weight: 600;
+    transition: border-bottom .3s;
+}
+.Title:focus {
+    border-bottom: 1px solid #007bff;
+}
+
+.ListGroup {
+    margin-top: 70px;
+}
+.Buttons {
+    margin-top: 70px;
+    padding: 0 5%;
+    border-left: 1px solid #d3d3d3;
+}
+.ListItem {
+    display: flex;
+    border: 0;
+    /* height: 50px; */
+    padding: 0;
+}
+.ListItemContent {
+    border: 0;
+    border-bottom: 1px solid #d3d3d3;
+    width: 100%;
+    margin: 10px 15px 10px 2px;
+    color: #474747;
+    font-size: 14px;
+    white-space: pre-wrap;
+    position: relative;
+}
+
+.DelButton,
+.EditButton {
+    height: 30px;
+    background: none;
+    color: #ff8c8c;
+    border: none;
+    padding: 0;
+    margin-top: 10px;
+    transition: color .3s;
+}
+.EditButton {
+    color: #eed600;
+    padding: 0;
+    margin: 0;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+.DelButton:hover{
+    color: red;
+    background: none;
+}
+.EditButton:hover{
+    color: #ffe600;
+    background: none;
+}
+
+.DelButton:focus,
+.EditButton:focus {outline: none;}
+@media (max-width: 767px) {
+    .Buttons {
+        border: none;
+    }
+}
