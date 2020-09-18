@@ -8,10 +8,12 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import authReducer from './store/reducers/auth';
-import {watchAuth} from './store/saga';
+import checklistsReducer from './store/reducers/checklists';
+import { watchAuth, watchChecklists } from './store/saga';
 
 const rootReducer = combineReducers({
-  auth: authReducer
+  auth: authReducer,
+  checklists: checklistsReducer
 })
 const sagaMiddleware = createSagaMiddleware();
 
@@ -20,13 +22,14 @@ const composeEnhancers = process.env.NODE_ENV === 'development' ? window.__REDUX
 const store = createStore(rootReducer, composeEnhancers(applyMiddleware(sagaMiddleware)))
 
 sagaMiddleware.run(watchAuth);
+sagaMiddleware.run(watchChecklists);
 
 ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>
       <App />
     </BrowserRouter>
-  </Provider> ,
+  </Provider>,
   document.getElementById('root')
 );
 

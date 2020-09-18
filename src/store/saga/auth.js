@@ -17,9 +17,10 @@ export function* authUser(action) {
     try {
         const response = yield axios.post(url, data);
         yield localStorage.setItem('user-id', response.data.localId);
+        yield localStorage.setItem('token' , response.data.idToken);
         const exDate = new Date(new Date().getTime() + response.data.expiresIn * 1000);
         yield localStorage.setItem('expiration-date', exDate);
-        yield put(actions.authSuccess(response.data.localId));
+        yield put(actions.authSuccess(response.data.localId, response.data.idToken));
         yield put(actions.checkTimeout(parseInt(response.data.expiresIn) * 1000));
     } catch (error) {
         yield put(actions.authFail(error));
@@ -29,6 +30,7 @@ export function* authUser(action) {
 export function* logoutSaga() {
     yield localStorage.removeItem('user-id');
     yield localStorage.removeItem('expiration-date');
+    yield localStorage.removeItem('token');
     yield put(actions.logoutSucceed());
 }
 
@@ -38,8 +40,8 @@ export function* autoLogin() {
         const exDate = yield new Date(localStorage.getItem('expiration-date'));
         const remainTime = exDate.getTime() - new Date().getTime();
         if(remainTime > 0) {
-            console.log(remainTime);
-            yield put(actions.authSuccess(userId));
+            const token = yield localStorage.getItem('token');
+            yield put(actions.authSuccess(userId, token));
             yield put(actions.checkTimeout(remainTime));
         } else {
             yield put(actions.logout());

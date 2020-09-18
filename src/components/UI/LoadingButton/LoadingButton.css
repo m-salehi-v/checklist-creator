@@ -1,0 +1,13 @@
+.Button {
+    color: white;
+    font-weight: 600;
+}
+.Button:focus{
+    background: #ffc107;
+    outline: none;
+    color: white;
+    border-color: #ffc107;
+}
+.Button:hover {
+    color: white;
+}

@@ -1,3 +1,8 @@
+.Container {
+    max-width: 90%;
+    margin: 0 0 0 auto;
+}
+
 .Title {
     border: 0;
     border-bottom: 1px solid #d3d3d3;
@@ -71,5 +76,13 @@
 @media (max-width: 767px) {
     .Buttons {
         border: none;
+        border-top: 1px solid #d3d3d3;
+        padding: 10px 0 0 0;
+    }
+    .ListGroup {
+        padding: 0;
+    }
+    .Container {
+        margin: 0 auto;
     }
 }
