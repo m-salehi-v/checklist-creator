@@ -11,6 +11,7 @@ import CreateChecklist from './containers/CreateChecklist/CreateChecklist';
 import Layout from './hoc/Layout/Layout';
 import * as actions from './store/actions';
 import MyChecklists from './containers/MyChecklists/MyChecklists';
+import UseChecklist from './containers/UseChecklist/UseChecklist';
 
 function App(props) {
   const autoLogin = props.autoLogin;
@@ -28,6 +29,7 @@ function App(props) {
           <Route path="/signin" component={Signin} />
           <Route path="/create" component={CreateChecklist} />
           <Route path="/mychecklists" component={MyChecklists} />
+          <Route path="/usechecklist/:path?/:checklistId?" component={UseChecklist} />
           <Redirect to="/"/>
         </Switch>
       </Layout>

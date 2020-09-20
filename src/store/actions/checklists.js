@@ -53,3 +53,37 @@ export const fetchChecklists = (token, userId) => {
         userId
     }
 }
+
+export const getChecklistByIdStart = () => {
+    return {
+        type: actionTypes.GET_CHECKLIST_BY_ID_START
+    }
+}
+export const getChecklistByIdSuccess = (fetchedChecklist) => {
+    return {
+        type: actionTypes.GET_CHECKLIST_BY_ID_SUCCESS,
+        fetchedChecklist
+    }
+}
+export const getChecklistByIdFail = (error) => {
+    return {
+        type: actionTypes.GET_CHECKLIST_BY_ID_FAIL,
+        error
+    }
+}
+export const getChecklistById = (id, token, path) => {
+    return {
+        type: actionTypes.GET_CHECKLIST_BY_ID,
+        id,
+        token,
+        path
+    }
+}
+
+
+export const setChecklistToUse = (updatedChecklist) => {
+    return {
+        type: actionTypes.SET_CHECKLIST_TO_USE,
+        updatedChecklist
+    }
+}

@@ -17,5 +17,21 @@ export {
     fetchChecklists,
     fetchChecklistsFail,
     fetchChecklistsStart,
-    fetchChecklistsSuccess
+    fetchChecklistsSuccess,
+    getChecklistById,
+    getChecklistByIdFail,
+    getChecklistByIdStart,
+    getChecklistByIdSuccess,
+    setChecklistToUse
 } from './checklists';
+
+export {
+    saveUsedChecklist,
+    saveUsedChecklistFail,
+    saveUsedChecklistStart,
+    saveUsedChecklistSuccess,
+    fetchUsedChecklists,
+    fetchUsedChecklistsFail,
+    fetchUsedChecklistsStart,
+    fetchUsedChecklistsSuccess
+} from './usedChecklists';
