@@ -1,0 +1,33 @@
+.Container {
+    display: flex;
+    flex-flow: wrap;
+    margin: 30px 0;
+    min-height: 200px;
+}
+
+.Card {
+    width: 180px;
+    min-width: 180px;
+    text-align: center;
+    padding: 20px 0 10px 0;
+    height: 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 0px 6px 21px 1px rgba(212, 212, 212, 1);
+    margin: 0 20px 20px 0;
+}
+
+.Button {
+    width: 70px;
+    height: 30px;
+    padding: 0;
+}
+
+.Spinner {
+    height: 100px; 
+    width: 100px; 
+    font-size: 40px;
+    display: block; 
+    margin: 100px auto;
+}

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { Link} from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { Form, Button, Card } from 'react-bootstrap';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import classes from '../auth.module.css';
 import {checkValidity} from '../../../shared/shared';
@@ -44,8 +44,13 @@ const Signup = props => {
         }
     ])
     const [isFormValid, setFromValid] = useState(false);
+
     const dispatch = useDispatch()
     const onAuthUser = (email, password, isSignup) => dispatch(actions.authUser(email, password, isSignup));
+    // const error = useSelector(state => state.auth.error);
+    // const loading = useSelector(state => state.auth.loading);
+    const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
+
     const inputChangeHandler = (event, index) => {
         const updatedForm = [...formElements];
         const updatedEl = { ...formElements[index] };
@@ -64,7 +69,9 @@ const Signup = props => {
         event.preventDefault();
         onAuthUser(formElements[1].value, formElements[2].value, true);
     }
-
+    if(isAuthenticated) {
+        return <Redirect to="/create" />
+    }
     return (
         <div className={classes.Container}>
             <Card className={classes.Card} >

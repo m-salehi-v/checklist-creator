@@ -28,3 +28,28 @@ export const saveChecklistFail = (error) => {
     }
 }
 
+export const fetchChecklistsStart = () => {
+    return {
+        type: actionTypes.FETCH_CHECKLISTS_START
+    }
+}
+
+export const fetchChecklistsSuccess = (fetchedData) => {
+    return {
+        type: actionTypes.FETCH_CHECKLISTS_SUCCESS,
+        fetchedData
+    }
+}
+export const fetchChecklistsFail = (error) => {
+    return {
+        type: actionTypes.FETCH_CHECKLISTS_FAIL,
+        error
+    }
+}
+export const fetchChecklists = (token, userId) => {
+    return {
+        type: actionTypes.FETCH_CHECKLISTS,
+        token,
+        userId
+    }
+}

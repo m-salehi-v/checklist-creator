@@ -13,5 +13,9 @@ export {
     saveChecklist,
     saveChecklistFail,
     saveChecklistStart,
-    saveChecklistSuccess
+    saveChecklistSuccess,
+    fetchChecklists,
+    fetchChecklistsFail,
+    fetchChecklistsStart,
+    fetchChecklistsSuccess
 } from './checklists';
