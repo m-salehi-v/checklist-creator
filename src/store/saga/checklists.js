@@ -7,8 +7,9 @@ export function* saveChecklist({token, data}) {
     yield put(actions.saveChecklistStart());
 
     try {
-        yield axios.post('https://checklist-creator-732ef.firebaseio.com/checklists.json?auth=' + token, data);
-        yield put(actions.saveChecklistSuccess(data));
+        const dataToSend = {...data, date: new Date()}
+        yield axios.post('https://checklist-creator-732ef.firebaseio.com/checklists.json?auth=' + token, dataToSend);
+        yield put(actions.saveChecklistSuccess(dataToSend));
     } catch (error) {
         yield put(actions.saveChecklistFail(error));
     }
@@ -24,6 +25,9 @@ export function* fetchChecklists({token, userId}) {
         for(let key in response.data){
             fetchedData.push({...response.data[key], id: key});
         }
+        fetchedData.sort((a, b) => {
+            return new Date(b.date).getTime() - new Date(a.date).getTime();
+        })
         yield put(actions.fetchChecklistsSuccess(fetchedData));
     } catch (error) {
         yield put(actions.fetchChecklistsFail(error));
@@ -40,6 +44,9 @@ export function* fetchUsedChecklists({token, userId}) {
         for(let key in response.data){
             fetchedData.push({...response.data[key], id: key});
         }
+        fetchedData.sort((a, b) => {
+            return new Date(b.date).getTime() - new Date(a.date).getTime();
+        })
         yield put(actions.fetchUsedChecklistsSuccess(fetchedData));
     } catch (error) {
         yield put(actions.fetchUsedChecklistsFail(error));
@@ -63,7 +70,7 @@ export function* saveUsedChecklist({token, data}) {
     try {
         const dataToSend = {...data, date: new Date()}
         yield axios.post('https://checklist-creator-732ef.firebaseio.com/used-checklists.json?auth=' + token, dataToSend);
-        yield put(actions.saveUsedChecklistSuccess(data));
+        yield put(actions.saveUsedChecklistSuccess(dataToSend));
     } catch (error) {
         yield put(actions.saveUsedChecklistFail(error));
     }
