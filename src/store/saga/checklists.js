@@ -75,3 +75,14 @@ export function* saveUsedChecklist({token, data}) {
         yield put(actions.saveUsedChecklistFail(error));
     }
 }
+
+export function* editChecklist({data, token, id}) {
+    yield put(actions.editChecklistStart());
+
+    try {
+        yield axios.patch(`https://checklist-creator-732ef.firebaseio.com/checklists/${id}.json?auth=${token}`, data);
+        yield put(actions.editChecklistSuccess());
+    } catch (error) {
+        yield put(actions.editChecklistFail(error));
+    }
+}

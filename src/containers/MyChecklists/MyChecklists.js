@@ -28,6 +28,9 @@ const MyChecklists = props => {
     const checklistUseHandler = (checklistId) => {
         props.history.push('/usechecklist/checklists/' + checklistId);
     }
+    const checklistEditHandler = (checklistId) => {
+        props.history.push('/edit/checklists/' + checklistId);
+    }
     const usedChecklistsUseHandler = (checklistId) => {
         props.history.push('/usechecklist/used-checklists/' + checklistId);
     }
@@ -50,7 +53,12 @@ const MyChecklists = props => {
                                             className={classes.Button}
                                             variant="primary"
                                         >use</Button>
-                                        <Button className={classes.Button} variant="secondary">edit</Button>
+
+                                        <Button
+                                            onClick={() => checklistEditHandler(el.id)}
+                                            className={classes.Button}
+                                            variant="secondary"
+                                        >edit</Button>
                                     </div>
                                 </div>
                             ))
@@ -94,8 +102,8 @@ const MyChecklists = props => {
                         <Button onClick={() => setExpandUsedChecks(!expandUsedChecks)}
                             style={{ height: '150px', background: 'none', border: 'none' }}>
                             {expandUsedChecks ?
-                                <i style={{ fontSize: '50px', color: 'blue' }} className="fas fa-minus-circle"></i> :
-                                <i style={{ fontSize: '50px', color: 'blue' }} className="fas fa-plus-circle"></i>
+                                <i style={{ fontSize: '45px', color: 'blue' }} className="fas fa-minus-circle"></i> :
+                                <i style={{ fontSize: '45px', color: 'blue' }} className="fas fa-plus-circle"></i>
                             }
                         </Button>
                     </>

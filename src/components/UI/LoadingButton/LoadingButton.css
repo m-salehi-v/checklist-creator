@@ -1,6 +1,8 @@
 .Button {
     color: white;
     font-weight: 600;
+    display: block;
+    margin: 40px auto;
 }
 .Button:focus{
     background: #ffc107;

@@ -30,6 +30,7 @@ function App(props) {
           <Route path="/create" component={CreateChecklist} />
           <Route path="/mychecklists" component={MyChecklists} />
           <Route path="/usechecklist/:path?/:checklistId?" component={UseChecklist} />
+          <Route path="/edit/:path?/:checklistId?" component={CreateChecklist} />
           <Redirect to="/"/>
         </Switch>
       </Layout>

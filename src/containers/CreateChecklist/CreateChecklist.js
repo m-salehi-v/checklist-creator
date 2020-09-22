@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { ListGroup, Container, FormCheck, Row, Col, Button, Alert } from 'react-bootstrap';
 import classes from './CreateChecklist.module.css';
 import { useSelector, useDispatch } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 
 import * as actions from '../../store/actions';
 import CreateTaskModal from '../../components/CreateTaskModal/CreateTaskModal';
@@ -20,6 +21,12 @@ const CreateChecklist = props => {
     const error = useSelector(state => state.checklists.error);
     const isLoading = useSelector(state => state.checklists.loading);
     const isSuccessful = useSelector(state => state.checklists.succeed);
+    const checklistToUse = useSelector(state => state.checklists.checklistToUse);
+    const isEditingChecklist = useState(props.match.path.includes("edit"))[0];
+    const editingSucceed = useSelector(state => state.editChecklist.succeed);
+    const editingError = useSelector(state => state.editChecklist.error);
+    const editingLoading = useSelector(state => state.editChecklist.loading);
+
     const dispatch = useDispatch();
 
     let initialMount = useRef(true);
@@ -35,11 +42,21 @@ const CreateChecklist = props => {
             }
         }
     }, [isSuccessful, error, isLoading]);
+    useEffect(() => {
+        if (isEditingChecklist && token) {
+            if(checklistToUse === null) {
+                dispatch(actions.getChecklistById(props.match.params.checklistId, token, 'checklists'));
+            }
+            if (checklistToUse) {
+                setTasks(checklistToUse.tasks);
+                setTitle(checklistToUse.title);
+            }
+        }
+    }, [props.match, token, dispatch, checklistToUse, isEditingChecklist])
     const addTaskHandler = (taskTitle, taskBody) => {
         setTasks([...tasks, { checked: false, body: taskBody, title: taskTitle }]);
         toggleModal();
     }
-
     const toggleModal = () => {
         setShowModal(!showModal);
     }
@@ -80,7 +97,15 @@ const CreateChecklist = props => {
             tasks: tasks,
             userId: id
         }
-        dispatch(actions.saveChecklist(data, token));
+        if(isEditingChecklist) {
+            dispatch(actions.editChecklist(token, data, props.match.params.checklistId));
+        } else{
+            dispatch(actions.saveChecklist(data, token));
+        }
+    }
+    if(editingSucceed) {
+        props.history.push('/mychecklists')
+        dispatch(actions.setSucceedToFalse())
     }
     return (
         <>
@@ -92,7 +117,7 @@ const CreateChecklist = props => {
                 onEditTask={editTaskHandler}
                 taskToEdit={curTaskToEdit} />
             <div>
-                {showAlert ?
+                {showAlert && !isEditingChecklist ?
                     isSuccessful ?
                         <Alert variant='success'>Checklist is successfully saved.</Alert> :
                         error ?
@@ -141,8 +166,8 @@ const CreateChecklist = props => {
                     <Col md="auto" className={classes.Buttons}>
                         {isAuthenticated ?
                             <LoadingButton width="100" clicked={saveChecklist}
-                                isLoading={isLoading}> save </LoadingButton> :
-                            <LoadingButton clicked={saveChecklist}  width='130px'>sign in to save</LoadingButton>
+                                isLoading={isEditingChecklist ? editingLoading : isLoading}> save </LoadingButton> :
+                            <LoadingButton clicked={saveChecklist} width='130px'>sign in to save</LoadingButton>
                         }
 
                     </Col>

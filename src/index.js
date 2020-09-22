@@ -10,12 +10,14 @@ import * as serviceWorker from './serviceWorker';
 import authReducer from './store/reducers/auth';
 import checklistsReducer from './store/reducers/checklists';
 import usedChecklistsReducer from './store/reducers/usedChecklists';
+import editChecklistReducer from './store/reducers/editChecklist';
 import { watchAuth, watchChecklists } from './store/saga';
 
 const rootReducer = combineReducers({
   auth: authReducer,
   checklists: checklistsReducer,
-  usedChecklists: usedChecklistsReducer
+  usedChecklists: usedChecklistsReducer,
+  editChecklist: editChecklistReducer
 })
 const sagaMiddleware = createSagaMiddleware();
 

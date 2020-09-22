@@ -35,3 +35,11 @@ export {
     fetchUsedChecklistsStart,
     fetchUsedChecklistsSuccess
 } from './usedChecklists';
+
+export {
+    editChecklist,
+    editChecklistFail,
+    editChecklistStart,
+    editChecklistSuccess,
+    setSucceedToFalse
+} from './editChecklist';
