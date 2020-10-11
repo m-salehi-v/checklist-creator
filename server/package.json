@@ -1,0 +1,26 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "server for checklist creator application",
+  "main": "bin/index.js",
+  "scripts": {
+    "start": "node bin/index.js",
+    "server": "nodemon bin/index.js",
+    "client": "cd .. && cd client && npm start",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
+  },
+  "author": "Mohammad SalehiVaziri",
+  "license": "MIT",
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  },
+  "dependencies": {
+    "concurrently": "^5.3.0",
+    "debug": "^4.2.0",
+    "express": "^4.17.1",
+    "http": "0.0.1-security",
+    "http-errors": "^1.8.0",
+    "morgan": "^1.10.0",
+    "mysql": "^2.18.1"
+  }
+}

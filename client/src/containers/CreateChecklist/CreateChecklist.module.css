@@ -9,7 +9,7 @@
     width: 100%;
     max-width: 250px;
     margin: 0 0 50px 0;
-    height: 40px;
+    min-height: 40px;
     color: #474747;
     font-size: 20px;
     font-weight: 600;
@@ -73,6 +73,7 @@
 
 .DelButton:focus,
 .EditButton:focus {outline: none;}
+
 @media (max-width: 767px) {
     .Buttons {
         border: none;
@@ -84,5 +85,14 @@
     }
     .Container {
         margin: 0 auto;
+    }
+}
+
+@media print {
+    .AddTaskBtn,
+    .EditButton,
+    .Buttons,
+    .DelButton  {
+        display: none;
     }
 }

@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef } from 'react';
 import { ListGroup, Container, FormCheck, Row, Col, Button, Alert } from 'react-bootstrap';
 import classes from './CreateChecklist.module.css';
 import { useSelector, useDispatch } from 'react-redux';
-import { Redirect } from 'react-router-dom';
 
 import * as actions from '../../store/actions';
 import CreateTaskModal from '../../components/CreateTaskModal/CreateTaskModal';
@@ -44,7 +43,7 @@ const CreateChecklist = props => {
     }, [isSuccessful, error, isLoading]);
     useEffect(() => {
         if (isEditingChecklist && token) {
-            if(checklistToUse === null) {
+            if (checklistToUse === null) {
                 dispatch(actions.getChecklistById(props.match.params.checklistId, token, 'checklists'));
             }
             if (checklistToUse) {
@@ -67,7 +66,9 @@ const CreateChecklist = props => {
         setTasks(updatedTasks);
     }
     const delelteTaskHandler = (taskIndex) => {
-        setTasks(tasks.filter((task, index) => index !== taskIndex))
+        if(window.confirm("Are you sure to delete this task?")){
+            setTasks(tasks.filter((task, index) => index !== taskIndex))
+        }
     }
     const hideModal = () => {
         setShowModal(false);
@@ -97,13 +98,18 @@ const CreateChecklist = props => {
             tasks: tasks,
             userId: id
         }
-        if(isEditingChecklist) {
+        if (isEditingChecklist) {
             dispatch(actions.editChecklist(token, data, props.match.params.checklistId));
-        } else{
+        } else {
             dispatch(actions.saveChecklist(data, token));
         }
     }
-    if(editingSucceed) {
+
+    const loginToSaveHandler = () => {
+        props.history.push('/signin');
+    }
+
+    if (editingSucceed) {
         props.history.push('/mychecklists')
         dispatch(actions.setSucceedToFalse())
     }
@@ -161,15 +167,17 @@ const CreateChecklist = props => {
                                 </ListGroup.Item>
                             ))}
                         </ListGroup>
-                        <Button onClick={toggleModal}>Add Task</Button>
+                        <Button className={classes.AddTaskBtn} onClick={toggleModal}>Add Task</Button>
                     </Col>
                     <Col md="auto" className={classes.Buttons}>
                         {isAuthenticated ?
                             <LoadingButton width="100" clicked={saveChecklist}
                                 isLoading={isEditingChecklist ? editingLoading : isLoading}> save </LoadingButton> :
-                            <LoadingButton clicked={saveChecklist} width='130px'>sign in to save</LoadingButton>
+                            <LoadingButton clicked={loginToSaveHandler} width='130px'>sign in to save</LoadingButton>
                         }
-
+                        <Button style={{ width: '100px' }}
+                            onClick={window.print}
+                            variant="outline-warning">print</Button>
                     </Col>
 
                 </Row>

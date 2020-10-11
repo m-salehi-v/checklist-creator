@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Container, Row, Col, ListGroup, FormCheck } from 'react-bootstrap';
+import { Container, Row, Col, ListGroup, FormCheck, Button } from 'react-bootstrap';
 import { Redirect } from 'react-router-dom';
 
 import classes from '../CreateChecklist/CreateChecklist.module.css';
@@ -92,6 +92,9 @@ const UseChecklist = props => {
                     </h6>
                     <LoadingButton width="100" clicked={saveChecklist}
                         isLoading={isLoading}> Done </LoadingButton>
+                    <Button style={{ width: '100px' }}
+                            onClick={window.print}
+                            variant="outline-warning">print</Button>
                 </Col>
 
             </Row>

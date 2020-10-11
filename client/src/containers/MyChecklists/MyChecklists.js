@@ -87,8 +87,8 @@ const MyChecklists = props => {
                             usedChecklistsToDispaly.map((el, index) => (
                                 <div className={classes.Card} key={index}>
                                     <h5>{el.title}</h5>
-                                    <p style={{ fontSize: '14px' }}>{new Date(el.date).toLocaleString()}</p>
-                                    <p>{el.completedTasks} / {el.tasksNum} completed</p>
+                                    <p className={classes.Date}>{el.completedTasks} / {el.tasksNum} completed</p>
+                                    <p className={classes.Date}>{new Date(el.date).toLocaleString()}</p>
                                     <div>
                                         <Button
                                             onClick={() => usedChecklistsUseHandler(el.id)}
@@ -120,11 +120,11 @@ const MyChecklists = props => {
     return (
         <div style={{ margin: '100px 30px' }}>
             <div>
-                <h4>Your Created Checklists</h4>
+                <h4 className={classes.Title}>Your Created Checklists</h4>
                 {contentCreated}
             </div>
             <div>
-                <h4>Your Recently Used Checklists</h4>
+                <h4 className={classes.Title}>Your Recently Used Checklists</h4>
                 {contentUsed}
             </div>
         </div>
