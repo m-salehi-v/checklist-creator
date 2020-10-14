@@ -3,6 +3,7 @@ const express = require('express');
 const logger = require('morgan');
 
 const checklistsRouter = require('./routes/checklists');
+const authRouter = require('./routes/auth');
 
 const app = express();
 
@@ -12,6 +13,7 @@ app.use(express.urlencoded({ extended: false }));
 
 
 app.use(checklistsRouter);
+app.use(authRouter);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));

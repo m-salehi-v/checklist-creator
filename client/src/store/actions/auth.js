@@ -6,11 +6,10 @@ export const authStart = () => {
     }
 }
 
-export const authSuccess = (userId, token) => {
+export const authSuccess = (userId) => {
     return {
         type: actionTypes.AUTH_SUCCESS,
-        userId,
-        token
+        userId
     }
 }
 
@@ -21,11 +20,10 @@ export const authFail = (error) => {
     }
 }
 
-export const authUser = (email, password, isSignup) => {
+export const authUser = (userData, isSignup) => {
     return {
         type: actionTypes.AUTH_USER,
-        email,
-        password,
+        userData,
         isSignup
     }
 }

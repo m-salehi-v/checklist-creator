@@ -7,9 +7,5 @@ export const checkValidity = (rules, value) => {
     if (rules.minLength) {
         isInvalid = !(value.length >= rules.minLength)
     }
-    if (rules.isUsername) {
-        const pattern = /^(?=.{4,20}$)[a-zA-Z0-9._]+$/;
-        isInvalid = !(isInvalid && pattern.test(value));
-    }
     return isInvalid;
 }

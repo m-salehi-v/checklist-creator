@@ -15,6 +15,7 @@
     "nodemon": "^2.0.4"
   },
   "dependencies": {
+    "bcrypt": "^5.0.0",
     "concurrently": "^5.3.0",
     "debug": "^4.2.0",
     "express": "^4.17.1",

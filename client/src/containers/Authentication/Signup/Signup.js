@@ -10,14 +10,14 @@ import * as actions from '../../../store/actions';
 const Signup = props => {
     const [formElements, setFromElements] = useState([
         {
-            label: 'Username',
+            label: 'Your name',
             type: 'text',
-            placeholder: 'Enter username',
+            placeholder: 'Enter your name',
             value: '',
             isInvalid: false,
-            invalidMsg: 'Username must be 4-20 chars long. You can only use letters, numbers, periods and underscore',
+            invalidMsg: 'This field can\'t be empty',
             validationRules: {
-                isUsername: true
+                minLength: 1
             }
         },
         {
@@ -46,7 +46,7 @@ const Signup = props => {
     const [isFormValid, setFromValid] = useState(false);
 
     const dispatch = useDispatch()
-    const onAuthUser = (email, password, isSignup) => dispatch(actions.authUser(email, password, isSignup));
+    const onAuthUser = (userData, isSignup) => dispatch(actions.authUser(userData, isSignup));
     // const error = useSelector(state => state.auth.error);
     // const loading = useSelector(state => state.auth.loading);
     const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
@@ -67,7 +67,12 @@ const Signup = props => {
     }
     const signupSubmitHandler = (event) => {
         event.preventDefault();
-        onAuthUser(formElements[1].value, formElements[2].value, true);
+        const data = {
+            name: formElements[0].value,
+            email: formElements[1].value,
+            password: formElements[2].value
+        }
+        onAuthUser(data, true);
     }
     if(isAuthenticated) {
         return <Redirect to="/create" />
