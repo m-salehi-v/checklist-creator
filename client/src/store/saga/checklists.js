@@ -19,7 +19,8 @@ export function* fetchChecklists({token, userId}) {
     yield put(actions.fetchChecklistsStart());
 
     try {
-        const url = `https://checklist-creator-732ef.firebaseio.com/checklists.json?auth=${token}&orderBy="userId"&equalTo="${userId}"`;
+        // const url = `https://checklist-creator-732ef.firebaseio.com/checklists.json?auth=${token}&orderBy="userId"&equalTo="${userId}"`;
+        const url = `/api/checklists/${userId}`;
         const response = yield axios.get(url);
         const fetchedData = [];
         for(let key in response.data){
