@@ -16,38 +16,27 @@ export function* authUser({userData, isSignup}) {
     }
     try {
         const response = yield axios.post(url, data);
-        // yield localStorage.setItem('user-id', response.data.localId);
-        // yield localStorage.setItem('token' , response.data.idToken);
-        // const exDate = new Date(new Date().getTime() + response.data.expiresIn * 1000);
-        // yield localStorage.setItem('expiration-date', exDate);
         yield put(actions.authSuccess(isSignup ? response.data.insertId : response.data.id));
-        // yield put(actions.checkTimeout(parseInt(response.data.expiresIn) * 1000));
     } catch (error) {
         yield put(actions.authFail(error));
     }
 }
 
 export function* logoutSaga() {
-    yield localStorage.removeItem('user-id');
-    yield localStorage.removeItem('expiration-date');
-    yield localStorage.removeItem('token');
-    yield put(actions.logoutSucceed());
+    try {
+        yield axios.get('/api/logout');
+        yield put(actions.logoutSucceed());
+    } catch (error) {
+        console.log(error);
+    }
 }
 
 export function* autoLogin() {
-    const userId = yield localStorage.getItem('user-id');
-    if(userId) {
-        const exDate = yield new Date(localStorage.getItem('expiration-date'));
-        const remainTime = exDate.getTime() - new Date().getTime();
-        if(remainTime > 0) {
-            const token = yield localStorage.getItem('token');
-            yield put(actions.authSuccess(userId, token));
-            yield put(actions.checkTimeout(remainTime));
-        } else {
-            yield put(actions.logout());
-        }
-    } else {
-        yield put(actions.logout())
+    try {
+        const response = yield axios.get('/api/autologin');
+        yield put(actions.authSuccess(response.data.id));
+    } catch (error) {
+        console.log(error);
     }
 }
 
