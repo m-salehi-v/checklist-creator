@@ -52,6 +52,15 @@ router.post('/api/signin', async (req, res, next) => {
     }
 });
 
+router.get('/api/autologin', checkToken, async (req, res, next) => {
+    const userId = req.userId;
+    res.send({id: userId});
+})
+
+router.get('/api/logout', async (req, res, next) => {
+    res.clearCookie('authcookie');
+    res.json('logged out');
+})
 
 
 module.exports = router;
