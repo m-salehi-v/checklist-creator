@@ -5,14 +5,14 @@ import * as actions from '../actions';
 
 export function* authUser({userData, isSignup}) {
     yield put(actions.authStart());
-    const data = {
+    let data = {
         name: userData.name,
         email: userData.email,
         password: userData.password
     };
     let url = '/api/signup';
     if(!isSignup) {
-        url = 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyBGyrLV6NE92EvgINlQ7Tn25dqZ6PCQWGU'
+        url = '/api/signin';
     }
     try {
         const response = yield axios.post(url, data);
@@ -20,7 +20,7 @@ export function* authUser({userData, isSignup}) {
         // yield localStorage.setItem('token' , response.data.idToken);
         // const exDate = new Date(new Date().getTime() + response.data.expiresIn * 1000);
         // yield localStorage.setItem('expiration-date', exDate);
-        yield put(actions.authSuccess(response.data.insertId));
+        yield put(actions.authSuccess(isSignup ? response.data.insertId : response.data.id));
         // yield put(actions.checkTimeout(parseInt(response.data.expiresIn) * 1000));
     } catch (error) {
         yield put(actions.authFail(error));

@@ -7,7 +7,7 @@ router.get('/api/checklists/:userId', async (req, res, next) => {
     const fetchedChecklist = await checklists.getChecklistsByUserId(req.params.userId);
     res.send(fetchedChecklist);
   } catch (err) {
-    res.status(500).send(err);
+    res.sendStatus(500).send(err);
   }
 });
 

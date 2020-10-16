@@ -35,7 +35,7 @@ const Signin = props => {
     const [isFormValid, setFromValid] = useState(false);
 
     const dispatch = useDispatch()
-    const onAuthUser = (email, password, isSignup) => dispatch(actions.authUser(email, password, isSignup));
+    const onAuthUser = (userData, isSignup) => dispatch(actions.authUser(userData, isSignup));
     // const error = useSelector(state => state.auth.error);
     // const loading = useSelector(state => state.auth.loading);
     const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
@@ -56,7 +56,11 @@ const Signin = props => {
     }
     const signinSubmitHandler = (event) => {
         event.preventDefault();
-        onAuthUser(formElements[0].value, formElements[1].value, false);
+        const userData = {
+            email: formElements[0].value,
+            password: formElements[1].value
+        }
+        onAuthUser(userData, false);
     }
     if(isAuthenticated) {
         return <Redirect to="/create" />
