@@ -19,10 +19,8 @@ const MyChecklists = props => {
     const [expandCreatedChecks, setExpandCreatedChecks] = useState(false);
     const [expandUsedChecks, setExpandUsedChecks] = useState(false);
     useEffect(() => {
-        if (token) {
-            dispatch(actions.fetchChecklists(token, userId));
-            dispatch(actions.fetchUsedChecklists(token, userId));
-        }
+        dispatch(actions.fetchChecklists(userId));
+        dispatch(actions.fetchUsedChecklists(token, userId));
     }, [token, userId, dispatch]);
 
     const checklistUseHandler = (checklistId) => {

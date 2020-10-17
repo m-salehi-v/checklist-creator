@@ -3,19 +3,19 @@ import axios from 'axios';
 
 import * as actions from '../actions';
 
-export function* saveChecklist({token, data}) {
+export function* saveChecklist({data}) {
     yield put(actions.saveChecklistStart());
 
     try {
-        const dataToSend = {...data, date: new Date()}
-        yield axios.post('https://checklist-creator-732ef.firebaseio.com/checklists.json?auth=' + token, dataToSend);
-        yield put(actions.saveChecklistSuccess(dataToSend));
+        console.log(data);
+        yield axios.post('/api/checklists/insert', data);
+        yield put(actions.saveChecklistSuccess(data));
     } catch (error) {
         yield put(actions.saveChecklistFail(error));
     }
 }
 
-export function* fetchChecklists({token, userId}) {
+export function* fetchChecklists({userId}) {
     yield put(actions.fetchChecklistsStart());
 
     try {

@@ -1,4 +1,4 @@
-import { delay, put } from 'redux-saga/effects';
+import { put } from 'redux-saga/effects';
 import axios from 'axios';
 
 import * as actions from '../actions';
@@ -38,9 +38,4 @@ export function* autoLogin() {
     } catch (error) {
         console.log(error);
     }
-}
-
-export function* checkTimeout(action) {
-    yield delay(action.expirationTime);
-    yield put(actions.logout());
 }

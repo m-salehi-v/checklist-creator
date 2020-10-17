@@ -101,7 +101,7 @@ const CreateChecklist = props => {
         if (isEditingChecklist) {
             dispatch(actions.editChecklist(token, data, props.match.params.checklistId));
         } else {
-            dispatch(actions.saveChecklist(data, token));
+            dispatch(actions.saveChecklist(data));
         }
     }
 

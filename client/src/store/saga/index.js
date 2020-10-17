@@ -1,13 +1,12 @@
 import { takeEvery, takeLatest } from 'redux-saga/effects';
 import * as actionTypes from '../actions/actionTypes';
-import { authUser, autoLogin, checkTimeout, logoutSaga } from './auth';
+import { authUser, autoLogin, logoutSaga } from './auth';
 import { editChecklist, fetchChecklists, fetchUsedChecklists, getChecklistById, saveChecklist, saveUsedChecklist } from './checklists';
 
 export function* watchAuth() {
     yield takeEvery(actionTypes.AUTH_USER, authUser);
     yield takeEvery(actionTypes.AUTH_LOGOUT_SAGA, logoutSaga);
     yield takeEvery(actionTypes.AUTO_LOGIN, autoLogin);
-    yield takeEvery(actionTypes.CHECK_TIMEOUT, checkTimeout);
 }
 
 export function* watchChecklists() {

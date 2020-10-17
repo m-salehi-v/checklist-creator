@@ -1,10 +1,9 @@
 import * as actionTypes from './actionTypes';
 
-export const saveChecklist = (newChecklist, token) => {
+export const saveChecklist = (newChecklist) => {
     return {
         type: actionTypes.SAVE_CHECKLIST,
-        data: newChecklist,
-        token
+        data: newChecklist
     }
 }
 
@@ -46,10 +45,9 @@ export const fetchChecklistsFail = (error) => {
         error
     }
 }
-export const fetchChecklists = (token, userId) => {
+export const fetchChecklists = (userId) => {
     return {
         type: actionTypes.FETCH_CHECKLISTS,
-        token,
         userId
     }
 }

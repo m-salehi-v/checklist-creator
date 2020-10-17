@@ -4,21 +4,21 @@ const jwt = require("jsonwebtoken");
 
 const auth = require('../db/auth.js');
 const config = require('../config');
+const {checkToken} = require('../controller/auth');
 
-
-const checkToken = (req, res, next) => {
-    const authcookie = req.cookies.authcookie;
-    jwt.verify(authcookie, config.jwt_secret_key, (err, data) => {
-        if (err) {
-            res.sendStatus(403)
-        } else if (data.id) {
-            req.userId = data.id
-            next()
-        } else {
-            res.sendStatus(403);
-        }
-    })
-}
+// const checkToken = (req, res, next) => {
+//     const authcookie = req.cookies.authcookie;
+//     jwt.verify(authcookie, config.jwt_secret_key, (err, data) => {
+//         if (err) {
+//             res.sendStatus(403)
+//         } else if (data.id) {
+//             req.userId = data.id
+//             next()
+//         } else {
+//             res.sendStatus(403);
+//         }
+//     })
+// }
 
 const tokenGenerator = (id) =>
     jwt.sign({ id }, config.jwt_secret_key, {
