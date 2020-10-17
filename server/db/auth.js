@@ -21,7 +21,7 @@ const signup = async ({ name, email, password }) => {
                             }
                         }
                         else {
-                            resolve(result);
+                            resolve({...result, userName: name});
                         }
                     })
             }

@@ -8,7 +8,8 @@ exports.checkToken = (req, res, next) => {
         if (err) {
             res.sendStatus(403)
         } else if (data.id) {
-            req.userId = data.id
+            req.userId = data.id;
+            req.userName = data.userName;
             next()
         } else {
             res.sendStatus(403);

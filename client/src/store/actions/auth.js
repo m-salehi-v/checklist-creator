@@ -6,10 +6,11 @@ export const authStart = () => {
     }
 }
 
-export const authSuccess = (userId) => {
+export const authSuccess = (userId, userName) => {
     return {
         type: actionTypes.AUTH_SUCCESS,
-        userId
+        userId,
+        userName
     }
 }
 

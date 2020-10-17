@@ -16,7 +16,8 @@ export function* authUser({userData, isSignup}) {
     }
     try {
         const response = yield axios.post(url, data);
-        yield put(actions.authSuccess(isSignup ? response.data.insertId : response.data.id));
+        console.log(response)
+        yield put(actions.authSuccess(isSignup ? response.data.insertId : response.data.id, response.data.userName));
     } catch (error) {
         yield put(actions.authFail(error));
     }
@@ -34,7 +35,7 @@ export function* logoutSaga() {
 export function* autoLogin() {
     try {
         const response = yield axios.get('/api/autologin');
-        yield put(actions.authSuccess(response.data.id));
+        yield put(actions.authSuccess(response.data.id, response.data.name));
     } catch (error) {
         console.log(error);
     }
