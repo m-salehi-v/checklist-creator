@@ -8,7 +8,6 @@ import classes from './MyChecklists.module.css';
 const MyChecklists = props => {
     const dispatch = useDispatch();
     const userId = useSelector(state => state.auth.userId);
-    const token = useSelector(state => state.auth.token);
     const errorCreated = useSelector(state => state.checklists.error);
     const isLoadingCreate = useSelector(state => state.checklists.loading);
     const errorUsed = useSelector(state => state.usedChecklists.error);
@@ -20,8 +19,8 @@ const MyChecklists = props => {
     const [expandUsedChecks, setExpandUsedChecks] = useState(false);
     useEffect(() => {
         dispatch(actions.fetchChecklists(userId));
-        dispatch(actions.fetchUsedChecklists(token, userId));
-    }, [token, userId, dispatch]);
+        dispatch(actions.fetchUsedChecklists(userId));
+    }, [userId, dispatch]);
 
     const checklistUseHandler = (checklistId) => {
         props.history.push('/usechecklist/checklists/' + checklistId);
@@ -85,7 +84,7 @@ const MyChecklists = props => {
                             usedChecklistsToDispaly.map((el, index) => (
                                 <div className={classes.Card} key={index}>
                                     <h5>{el.title}</h5>
-                                    <p className={classes.Date}>{el.completedTasks} / {el.tasksNum} completed</p>
+                                    <p className={classes.Date}>{el.completed_tasks} / {el.tasks_number} completed</p>
                                     <p className={classes.Date}>{new Date(el.date).toLocaleString()}</p>
                                     <div>
                                         <Button

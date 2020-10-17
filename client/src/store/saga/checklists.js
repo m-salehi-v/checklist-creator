@@ -7,8 +7,8 @@ export function* saveChecklist({data}) {
     yield put(actions.saveChecklistStart());
 
     try {
-        console.log(data);
-        yield axios.post('/api/checklists/insert', data);
+        const dataToSend = {...data, date: new Date()}
+        yield axios.post('/api/checklists/insert', dataToSend);
         yield put(actions.saveChecklistSuccess(data));
     } catch (error) {
         yield put(actions.saveChecklistFail(error));
@@ -19,12 +19,11 @@ export function* fetchChecklists({userId}) {
     yield put(actions.fetchChecklistsStart());
 
     try {
-        // const url = `https://checklist-creator-732ef.firebaseio.com/checklists.json?auth=${token}&orderBy="userId"&equalTo="${userId}"`;
         const url = `/api/checklists/${userId}`;
         const response = yield axios.get(url);
         const fetchedData = [];
         for(let key in response.data){
-            fetchedData.push({...response.data[key], id: key});
+            fetchedData.push({...response.data[key]});
         }
         fetchedData.sort((a, b) => {
             return new Date(b.date).getTime() - new Date(a.date).getTime();
@@ -35,15 +34,15 @@ export function* fetchChecklists({userId}) {
     }
 }
 
-export function* fetchUsedChecklists({token, userId}) {
+export function* fetchUsedChecklists({userId}) {
     yield put(actions.fetchUsedChecklistsStart());
 
     try {
-        const url = `https://checklist-creator-732ef.firebaseio.com/used-checklists.json?auth=${token}&orderBy="userId"&equalTo="${userId}"`;
+        const url = `/api/usedChecklists/${userId}`;
         const response = yield axios.get(url);
         const fetchedData = [];
         for(let key in response.data){
-            fetchedData.push({...response.data[key], id: key});
+            fetchedData.push({...response.data[key]});
         }
         fetchedData.sort((a, b) => {
             return new Date(b.date).getTime() - new Date(a.date).getTime();
@@ -54,23 +53,23 @@ export function* fetchUsedChecklists({token, userId}) {
     }
 }
 
-export function* getChecklistById({id, token, path}) {
+export function* getChecklistById({id, path}) {
     yield put(actions.getChecklistByIdStart());
 
     try {
-        const response = yield axios.get(`https://checklist-creator-732ef.firebaseio.com/${path}/${id}.json?auth=${token}`);
+        const response = yield axios.get(`/api/usechecklists/${path}/${id}`);
         yield put(actions.getChecklistByIdSuccess(response.data));
     } catch (error) {
         yield put(actions.getChecklistByIdFail(error));
     }
 }
 
-export function* saveUsedChecklist({token, data}) {
+export function* saveUsedChecklist({data}) {
     yield put(actions.saveUsedChecklistStart());
 
     try {
         const dataToSend = {...data, date: new Date()}
-        yield axios.post('https://checklist-creator-732ef.firebaseio.com/used-checklists.json?auth=' + token, dataToSend);
+        yield axios.post('/api/usedChecklists/insert' , dataToSend);
         yield put(actions.saveUsedChecklistSuccess(dataToSend));
     } catch (error) {
         yield put(actions.saveUsedChecklistFail(error));

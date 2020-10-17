@@ -16,11 +16,9 @@ const UseChecklist = props => {
 
     const [checkedItemsNum, setCheckedItemsNum] = useState(null);
     useEffect(() => {
-        if(token) {
-            const checklistId = props.match.params.checklistId;
-            const path = props.match.params.path;
-            dispatch(actions.getChecklistById(checklistId, token, path));
-        }
+        const checklistId = props.match.params.checklistId;
+        const path = props.match.params.path;
+        dispatch(actions.getChecklistById(checklistId, path));
     }, [dispatch, props.match.params.checklistId, token, props.match.params.path]);
 
     const getNumberOfCheckedItems = () => {
@@ -46,7 +44,7 @@ const UseChecklist = props => {
     }
 
     const saveChecklist = () => {
-        dispatch(actions.saveUsedChecklist(token, {...checklist, completedTasks: checkedItemsNum, tasksNum: tasksNum}));
+        dispatch(actions.saveUsedChecklist({...checklist, completedTasks: checkedItemsNum, tasksNum: tasksNum}));
     }
 
     if(saveUsedChecklistSucceed) {

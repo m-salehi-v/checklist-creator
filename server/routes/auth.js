@@ -31,7 +31,7 @@ router.post('/api/signup', async (req, res, next) => {
         const result = await auth.signup(req.body);
         const token = tokenGenerator(result.insertId);
         res.cookie('authcookie', token,  config.cookieOptions);
-        res.send(result);
+        res.json(result);
     } catch (err) {
         console.log(err);
         res.sendStatus(400).send(err);
@@ -45,7 +45,7 @@ router.post('/api/signin', async (req, res, next) => {
         const token = tokenGenerator(result.id);
         res.cookie('authcookie', token, config.cookieOptions);
         console.log(result)
-        res.send({id:result.id });
+        res.json({id:result.id });
     } catch (err) {
         console.log(err)
         res.sendStatus(400).send(err);
@@ -54,7 +54,7 @@ router.post('/api/signin', async (req, res, next) => {
 
 router.get('/api/autologin', checkToken, async (req, res, next) => {
     const userId = req.userId;
-    res.send({id: userId});
+    res.json({id: userId});
 })
 
 router.get('/api/logout', async (req, res, next) => {

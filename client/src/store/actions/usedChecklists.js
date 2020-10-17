@@ -16,10 +16,9 @@ export const saveUsedChecklistSuccess = (newChecklist) => {
         newChecklist
     }
 }
-export const saveUsedChecklist = (token, data) => {
+export const saveUsedChecklist = (data) => {
     return {
         type: actionTypes.SAVE_USED_CHECKLIST,
-        token,
         data
     }
 }
@@ -43,10 +42,9 @@ export const fetchUsedChecklistsFail = (error) => {
         error
     }
 }
-export const fetchUsedChecklists = (token, userId) => {
+export const fetchUsedChecklists = ( userId) => {
     return {
         type: actionTypes.FETCH_USED_CHECKLISTS,
-        token,
         userId
     }
 }

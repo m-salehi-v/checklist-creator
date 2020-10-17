@@ -69,11 +69,10 @@ export const getChecklistByIdFail = (error) => {
         error
     }
 }
-export const getChecklistById = (id, token, path) => {
+export const getChecklistById = (id, path) => {
     return {
         type: actionTypes.GET_CHECKLIST_BY_ID,
         id,
-        token,
         path
     }
 }
